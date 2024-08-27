@@ -75,10 +75,17 @@ if __name__ == "__main__":
   key = os.getenv("SUPABASE_KEY")
   supabase = create_client(url_supabase, key)
 
+  params = sys.argv[1].upper()
   # Check the running argument
-  if (sys.argv[1] is not None and sys.argv[1].upper() in PARAMS_DICT):
+  if (sys.argv[1] is not None and params in PARAMS_DICT):
+    
+    
+    USED_DICT = PARAMS_DICT[params]
+    if (params == "SG") :
+      print(f"[START] Starting the system to scrape SGX's data")
+    else:
+      print(f"[START] Starting the system to scrape KLSE's data")
 
-    USED_DICT = PARAMS_DICT[sys.argv[1].upper()]
     DB_TABLE = USED_DICT["db_table"]
     SYMBOL_COLUMN = USED_DICT['symbol_column']
     TYPE_ID = USED_DICT['type_id']
@@ -101,12 +108,12 @@ if __name__ == "__main__":
     i2 = 2 * i1
     i3 = 3 * i1
 
-    if (USED_DICT == "SG"):
+    if (params == "SG"):
       p1 = Process(target=scrap_function_sg, args=(symbol_list[:i1], 1))
       p2 = Process(target=scrap_function_sg, args=(symbol_list[i1:i2], 2))
       p3 = Process(target=scrap_function_sg, args=(symbol_list[i2:i3], 3))
       p4 = Process(target=scrap_function_sg, args=(symbol_list[i3:], 4))
-    else: # USED_DICT == "MY"
+    else: # params == "MY"
       p1 = Process(target=scrap_function_my, args=(symbol_list[:i1], 1))
       p2 = Process(target=scrap_function_my, args=(symbol_list[i1:i2], 2))
       p3 = Process(target=scrap_function_my, args=(symbol_list[i2:i3], 3))
@@ -123,9 +130,9 @@ if __name__ == "__main__":
     p4.join()
 
     # Handle null data
-    if (USED_DICT == "SG"):
+    if (params == "SG"):
       scrap_null_data_sg()
-    else: # USED_DICT == "MY"
+    else: # params == "MY"
       scrap_null_data_my()
 
     # Merge data
