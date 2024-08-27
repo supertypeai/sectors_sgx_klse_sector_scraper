@@ -101,32 +101,33 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    # Divide to processes
-    length_list = len(symbol_list)
-    i1 = int(length_list / 4)
-    i2 = 2 * i1
-    i3 = 3 * i1
+    # # Divide to processes
+    # length_list = len(symbol_list)
+    # i1 = int(length_list / 4)
+    # i2 = 2 * i1
+    # i3 = 3 * i1
 
-    p1 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[:i1], 1))
-    p2 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i1:i2], 2))
-    p3 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i2:i3], 3))
-    p4 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i3:], 4))
+    # p1 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[:i1], 1))
+    # p2 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i1:i2], 2))
+    # p3 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i2:i3], 3))
+    # p4 = Process(target=SCRAPING_FUNCTION, args=(symbol_list[i3:], 4))
 
-    p1.start()
-    p2.start()
-    p3.start()
-    p4.start()
+    # p1.start()
+    # p2.start()
+    # p3.start()
+    # p4.start()
 
-    p1.join()
-    p2.join()
-    p3.join()
-    p4.join()
+    # p1.join()
+    # p2.join()
+    # p3.join()
+    # p4.join()
 
-    # Handle null data
-    NULL_HANDLING_FUNCTION()
+    # # Handle null data
+    # NULL_HANDLING_FUNCTION()
 
     # Merge data
     df_final = combine_data(df_db_data, TYPE_ID, SYMBOL_COLUMN)
+
 
     # Convert to json. Remove the index in dataframe
     records = df_final.to_dict(orient="records")

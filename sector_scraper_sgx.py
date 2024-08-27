@@ -39,17 +39,17 @@ SYMBOL_LIST_MAP = {
   "QSD" : "V7R" #Resources Global
 }
 
-def get_screener_page_data():
-  try:
-    res = requests.get(SCREENER_API_URL)
-    if (res.status_code == 200):
-      # Make it to JSON
-      json_data = json.loads(res.text)
-      # Get the data only
-      return json_data['data']
-  except Exception as e:
-    print(f"Failed to get API from {SCREENER_API_URL}: {e}")
-    return None
+# def get_screener_page_data():
+#   try:
+#     res = requests.get(SCREENER_API_URL)
+#     if (res.status_code == 200):
+#       # Make it to JSON
+#       json_data = json.loads(res.text)
+#       # Get the data only
+#       return json_data['data']
+#   except Exception as e:
+#     print(f"Failed to get API from {SCREENER_API_URL}: {e}")
+#     return None
 
 
 def get_url(base_url: str, symbol: str) -> str:
