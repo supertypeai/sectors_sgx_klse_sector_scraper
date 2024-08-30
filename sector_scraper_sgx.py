@@ -47,7 +47,7 @@ def read_page(url: str):
   try:
     session = HTMLSession()
     response = session.get(url)
-    response.html.render(sleep=1, timeout=5)
+    response.html.render(sleep=5, timeout=10)
 
     soup = BeautifulSoup(response.html.html, "html.parser")
     return soup
