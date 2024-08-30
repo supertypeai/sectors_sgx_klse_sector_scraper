@@ -141,8 +141,8 @@
   },
   {
     "symbol":"40B",
-    "sector":"Cyclical Consumer Services",
-    "sub_sector":" Hotels"
+    "sector":"Real Estate",
+    "sub_sector":" Real Estate Services"
   },
   {
     "symbol":"40E",
@@ -486,8 +486,8 @@
   },
   {
     "symbol":"5DP",
-    "sector":"Real Estate",
-    "sub_sector":" Real Estate Development & Operations"
+    "sector":"Cyclical Consumer Services",
+    "sub_sector":" Hotels"
   },
   {
     "symbol":"5DS",
@@ -506,8 +506,8 @@
   },
   {
     "symbol":"5EB",
-    "sector":"Industrial Goods",
-    "sub_sector":" Industrial Machinery & Equipment"
+    "sector":"Mineral Resources",
+    "sub_sector":" Iron & Steel"
   },
   {
     "symbol":"5EF",
