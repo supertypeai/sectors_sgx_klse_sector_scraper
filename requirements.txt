@@ -5,4 +5,3 @@ python-dotenv==1.0.1
 Requests==2.32.3
 requests_html==0.10.0
 supabase==2.7.3
-websockets==8.1

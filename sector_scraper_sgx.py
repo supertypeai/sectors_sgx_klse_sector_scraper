@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 import json
 import logging
-import requests
 import os
 import time
+import urllib.request
 
 # Set the logging level for the 'websockets' logger
 logging.getLogger('websockets').setLevel(logging.WARNING)
@@ -14,7 +14,8 @@ logging.getLogger('requests_html').setLevel(logging.WARNING)
 
 
 # Setup Constant 
-# SCREENER_API_URL = "https://api.sgx.com/stockscreener/v1.0/all?params=exchange%2CexchangeCountryCode%2CcompanyName%2CstockCode%2CricCode%2CmarketCapitalization%2CsalesTTM%2CpriceToEarningsRatio%2CdividendYield%2CfourWeekPricePercentChange%2CthirteenWeekPricePercentChange%2CtwentySixWeekPricePercentChange%2CfiftyTwoWeekPricePercentChange%2CnetProfitMargin%2CreturnOnAvgCommonEquity%2CpriceToCashFlowPerShareRatio%2CtotalDebtToTotalEquityRatio%2CsalesPercentageChange%2Csector%2CpriceToBookRatio%2CpriceCurrCode"
+USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+
 BASE_URL = "https://investors.sgx.com/_security-types/stocks/"
 ALT_BASE_URL_1 = "https://investors.sgx.com/_security-types/reits/"
 ALT_BASE_URL_2 = "https://investors.sgx.com/_security-types/businesstrusts/"
@@ -39,19 +40,6 @@ SYMBOL_LIST_MAP = {
   "QSD" : "V7R" #Resources Global
 }
 
-# def get_screener_page_data():
-#   try:
-#     res = requests.get(SCREENER_API_URL)
-#     if (res.status_code == 200):
-#       # Make it to JSON
-#       json_data = json.loads(res.text)
-#       # Get the data only
-#       return json_data['data']
-#   except Exception as e:
-#     print(f"Failed to get API from {SCREENER_API_URL}: {e}")
-#     return None
-
-
 def get_url(base_url: str, symbol: str) -> str:
   return f"{base_url}{symbol}"
 
@@ -59,7 +47,7 @@ def read_page(url: str):
   try:
     session = HTMLSession()
     response = session.get(url)
-    response.html.render(sleep=5, timeout=10)
+    response.html.render(sleep=1, timeout=5)
 
     soup = BeautifulSoup(response.html.html, "html.parser")
     return soup
